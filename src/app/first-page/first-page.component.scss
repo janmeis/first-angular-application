@@ -1,0 +1,11 @@
+.first-page-cards {
+  padding: 2rem 10rem;
+  .first-page-first-card {
+    justify-content: center;
+    min-height: 12rem;
+    .first-page-toggle {
+      margin-left: 45%;
+      padding: .75rem 0;
+    }
+  }
+}
