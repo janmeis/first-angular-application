@@ -1,6 +1,33 @@
-.post-card {
-  .post-title {
-    margin-left: 0;
+@mixin post-mat-label {
+  mat-label {
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding-right: 0.2rem;
   }
+  margin-bottom: 0.3rem;
+}
+.user-select {
+  width: 30%;
+}
+.post-card {
   margin: 2rem;
+  .post-card-title {
+    @include post-mat-label;
+    margin: 0 0 0.3rem 0;
+  }
+  .post-title {
+    @include post-mat-label;
+  }
+  .post-body {
+    @include post-mat-label;
+    div {
+      font-style: italic;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+.post-spinner {
+  position: absolute;
+  left: 45%;
+  top: 45%;
 }

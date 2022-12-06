@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, delay, map, Observable } from 'rxjs';
 import { Post } from '../models/post';
+import { User } from '../models/user';
 
+/// <see cref="https://jsonplaceholder.typicode.com" />
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,18 @@ export class JsonplaceholderTypicodeComService {
     private http: HttpClient
   ) { }
 
-  getPosts$ = (userId: number): Observable<Post[]> => this.get$<Post[]>('posts', {'userId': userId})
+  getUsers$ = (): Observable<User[]> => this.get$<User[]>('users').pipe(
+    map(users => users.map(u => ({
+      id: u.id,
+      name: u.name,
+      username: u.username,
+      email: u.email
+    } as User)))
+  )
+
+  getPosts$ = (userId: number): Observable<Post[]> => this.get$<Post[]>('posts', { 'userId': userId }).pipe(
+    delay(1000)
+  )
 
   private get$<T>(url: string, args: any = null): Observable<T> {
     return this.http.get<T>(this.getUrl(url, args), this.getOptions()).pipe(

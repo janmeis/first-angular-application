@@ -11,6 +11,7 @@ import { FirstPageComponent } from './first-page/first-page.component';
 import { MaterialModule } from './material.module';
 import { NavigationComponent } from './navigation/navigation.component';
 import { PostComponent } from './post/post.component';
+import { NewLinePipe } from './pipes/new-line.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PostComponent } from './post/post.component';
     DashboardComponent,
     FirstPageComponent,
     PostComponent,
+    NewLinePipe,
   ],
   imports: [
     AppRoutingModule,
