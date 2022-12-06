@@ -1,13 +1,9 @@
-<mat-grid-list class="first-page-cards">
-  <mat-card class="first-page-first-card">
-      <div *ngFor="let data of options" class="first-page-toggle">
-        <mat-slide-toggle [id]="data.id"
-                          [disabled]="data.disabled"
-                          (change)="disableAll($event)">
-          {{data.title}}
-        </mat-slide-toggle>
-      </div>
-    <mat-card-content>
-    </mat-card-content>
-  </mat-card>
-</mat-grid-list>
+<mat-card class="first-page-card">
+    <div *ngFor="let data of options" class="first-page-toggle">
+      <mat-slide-toggle [id]="data.id"
+                        [checked]="data.checked"
+                        (change)="onChange($event)">{{data.title}}</mat-slide-toggle>
+    </div>
+  <mat-card-content>
+  </mat-card-content>
+</mat-card>
