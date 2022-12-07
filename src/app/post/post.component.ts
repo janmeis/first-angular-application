@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { Observable, of } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { Post } from '../models/post';
 import { User } from '../models/user';
 import { JsonplaceholderTypicodeComService } from '../services/jsonplaceholder-typicode-com.service';
@@ -13,15 +13,19 @@ import { JsonplaceholderTypicodeComService } from '../services/jsonplaceholder-t
 export class PostComponent implements OnInit {
   posts$: Observable<Post[]> = of([]);
   users$: Observable<User[]> = of([]);
-  userId = 1;
+  userId = 0;
 
   constructor(
     private typicodeService: JsonplaceholderTypicodeComService
   ) { }
 
   ngOnInit(): void {
-    this.users$ = this.typicodeService.getUsers$();
-    this.posts$ = this.typicodeService.getPosts$(this.userId);
+    this.users$ = this.typicodeService.getUsers$().pipe(
+      tap(users => {
+        this.userId = users[0]?.id;
+        this.posts$ = this.typicodeService.getPosts$(this.userId);
+      })
+    );
   }
 
   onSelectionChange(event: MatSelectChange): void {
