@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
+/// <see cref="https://material.angular.io/guide/schematics#address-form-schematic" />
+
 @Component({
   selector: 'app-address-form',
   templateUrl: './address-form.component.html',

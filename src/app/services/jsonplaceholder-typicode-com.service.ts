@@ -4,6 +4,7 @@ import { delay, map, Observable } from 'rxjs';
 import { Post } from '../models/post';
 import { User } from '../models/user';
 import { ApiBaseService } from './api-base.service';
+import { HttpErrorService } from './http-error.service';
 
 /// <see cref="https://jsonplaceholder.typicode.com" />
 @Injectable({
@@ -12,9 +13,10 @@ import { ApiBaseService } from './api-base.service';
 export class JsonplaceholderTypicodeComService extends ApiBaseService {
 
   constructor(
-    http: HttpClient
+    http: HttpClient,
+    httpError: HttpErrorService
   ) {
-    super(http);
+    super(http, httpError);
   }
 
   getUsers$ = (): Observable<User[]> => this.get$<User[]>('users').pipe(

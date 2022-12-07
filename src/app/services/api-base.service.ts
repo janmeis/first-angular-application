@@ -1,18 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, tap } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
+import { HttpErrorService } from './http-error.service';
 
 @Injectable()
 export abstract class ApiBaseService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private httpError: HttpErrorService
   ) { }
 
   protected get$<T>(url: string, args: any = null): Observable<T> {
     return this.http.get<T>(this.getUrl(url, args), this.getOptions()).pipe(
       catchError((err, caught) => {
-        console.log(err);
+        this.httpError.addErrorResponse(err);
         return caught;
       })
     );
