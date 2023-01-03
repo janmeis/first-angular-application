@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorService } from './services/http-error.service';
 
 /// <see cref="https://stackblitz.com/edit/angular-material-notification-service" />
