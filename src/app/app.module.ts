@@ -12,6 +12,7 @@ import { MaterialModule } from './material.module';
 import { NavigationComponent } from './navigation/navigation.component';
 import { PostComponent } from './post/post.component';
 import { NewLinePipe } from './pipes/new-line.pipe';
+import { UsersPostComponent } from './components/users-post/users-post.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NewLinePipe } from './pipes/new-line.pipe';
     FirstPageComponent,
     PostComponent,
     NewLinePipe,
+    UsersPostComponent,
   ],
   imports: [
     AppRoutingModule,

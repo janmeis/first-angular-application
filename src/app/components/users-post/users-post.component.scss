@@ -1,0 +1,28 @@
+@mixin post-mat-label {
+  mat-label {
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding-right: 0.2rem;
+  }
+  margin-bottom: 0.3rem;
+}
+.post-card {
+  margin: 2rem;
+  .post-card-title {
+    @include post-mat-label;
+    margin: 0 0 0.3rem 0;
+  }
+  .post-title {
+    @include post-mat-label;
+  }
+  .post-body {
+    @include post-mat-label;
+    div {
+      font-style: italic;
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  &.post-selected {
+    background-color: rgba(165, 165, 165, 0.2);
+  }
+}

@@ -1,28 +1,15 @@
-@mixin post-mat-label {
-  mat-label {
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding-right: 0.2rem;
+.selected-post {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  .user-select {
+    width: 30%;
   }
-  margin-bottom: 0.3rem;
-}
-.user-select {
-  width: 30%;
-}
-.post-card {
-  margin: 2rem;
-  .post-card-title {
-    @include post-mat-label;
-    margin: 0 0 0.3rem 0;
-  }
-  .post-title {
-    @include post-mat-label;
-  }
-  .post-body {
-    @include post-mat-label;
-    div {
-      font-style: italic;
-      color: rgba(0, 0, 0, 0.5);
+  .selected-post-id {
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    label {
+      font-weight: 500;
     }
   }
 }
