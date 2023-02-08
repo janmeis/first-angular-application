@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddressFormComponent } from './address-form/address-form.component';
+import { AddressListComponent } from './address-list/address-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FirstPageComponent } from './first-page/first-page.component';
 import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'first-page', pathMatch: 'full' },
-  { path: 'first-page', component: FirstPageComponent, title: 'first-page' },
-  { path: 'address-form', component: AddressFormComponent, title: 'address-form' },
-  { path: 'dashboard', component: DashboardComponent, title: 'dashboard' },
-  { path: 'posts', component: PostComponent, title: 'posts' },
+  { path: 'first-page', component: FirstPageComponent, pathMatch: 'full', title: 'first-page' },
+  { path: 'address-list', component: AddressListComponent, pathMatch: 'full', title: 'address-list' },
+  { path: 'dashboard', component: DashboardComponent, pathMatch: 'full', title: 'dashboard' },
+  { path: 'posts', component: PostComponent, pathMatch: 'full', title: 'posts' },
 ];
 
 @NgModule({

@@ -1,0 +1,30 @@
+.mat-mdc-dialog-content {
+  padding: 0 0.5rem;
+  .shipping-card > .mat-mdc-card-content {
+    padding: 0.65rem;
+    .full-width {
+      width: 100%;
+    }
+    .mat-radio-button {
+      display: block;
+      margin: 5px 0;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .col {
+      flex: 1;
+      margin-right: 20px;
+    }
+
+    .col:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.mat-mdc-dialog-actions {
+  margin-bottom: 0.5rem;
+}

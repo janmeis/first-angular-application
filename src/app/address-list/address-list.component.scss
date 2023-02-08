@@ -1,0 +1,38 @@
+section {
+  display: table;
+  padding: 1rem 0 0 1rem;
+  .button-row {
+    display: table-cell;
+    float: right;
+    .mat-mdc-raised-button:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+.address-list-card {
+  margin: 1rem;
+
+  .address-list-table {
+    padding: 1rem 0;
+    .mat-mdc-header-row > .mat-mdc-header-cell,
+    .mat-mdc-row > .mat-mdc-cell {
+      &:first-child {
+        padding-left: 2rem !important;
+      }
+    }
+    .mat-mdc-row .mat-mdc-cell {
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+      cursor: pointer;
+    }
+    .mat-mdc-row:hover .mat-mdc-cell {
+      border-color: currentColor;
+    }
+  }
+}
+
+.post-spinner {
+  position: absolute;
+  left: 45%;
+  top: 45%;
+}

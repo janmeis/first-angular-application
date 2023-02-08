@@ -1,0 +1,48 @@
+<ng-container *ngIf="states$ | async as states;else waitForStore">
+  <ng-container *ngIf="addresses$ | async as addresses;else waitForStore">
+    <section>
+      <div class="button-row">
+        <button mat-raised-button color="accent" (click)="onRowClicked()">Add shipping address</button>
+      </div>
+    </section>
+
+    <mat-card class="address-list-card">
+      <table mat-table [dataSource]="addresses" class="mat-elevation-z8 address-list-table">
+        <ng-container matColumnDef="company">
+          <th mat-header-cell *matHeaderCellDef>Company</th>
+          <td mat-cell *matCellDef="let element">{{element.company}}</td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{element.firstName}} {{element.lastName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let element">{{element.address}}</td>
+        </ng-container>
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef>City</th>
+          <td mat-cell *matCellDef="let element">{{element.city}}</td>
+        </ng-container>
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>State</th>
+          <td mat-cell *matCellDef="let element">{{element.state | state:states}}</td>
+        </ng-container>
+        <ng-container matColumnDef="postalCode">
+          <th mat-header-cell *matHeaderCellDef>Postal code</th>
+          <td mat-cell *matCellDef="let element">{{element.postalCode | zipCode}}</td>
+        </ng-container>
+        <ng-container matColumnDef="shipping">
+          <th mat-header-cell *matHeaderCellDef>Shipping</th>
+          <td mat-cell *matCellDef="let element">{{shippingText[element.shipping]}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="onRowClicked(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card>
+  </ng-container>
+</ng-container>
+
+<ng-template #waitForStore>
+  <mat-spinner [diameter]="300" class="post-spinner"></mat-spinner>
+</ng-template>
