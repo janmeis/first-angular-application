@@ -12,6 +12,20 @@ interface IState {
   abbreviation: string;
 }
 
+type shipping = 'free' | 'priority' | 'nextday';
+
+interface IAddress {
+  company: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  address2: null,
+  city: string;
+  state: string;
+  postalCode: string;
+  shipping: shipping
+};
+
 @Component({
   selector: 'app-address-form',
   templateUrl: './address-form.component.html',
@@ -19,10 +33,10 @@ interface IState {
 })
 export class AddressFormComponent implements OnInit {
   @ViewChild('form') private form!: NgForm;
-  itemColl!: CollectionReference<DocumentData>;
+  statesColl!: CollectionReference<DocumentData>;
   addressColl!: CollectionReference<DocumentData>;
   states$!: Observable<IState[]>;
-  addresses$!: Observable<{ firstName: string; lastName: string }[]>;
+  addresses$!: Observable<IAddress[]>;
   addressForm = this.fb.group({
     company: null,
     firstName: [null, Validators.required],
@@ -105,12 +119,16 @@ export class AddressFormComponent implements OnInit {
     private fb: FormBuilder,
     private store: Firestore
   ) {
-    this.itemColl = collection(this.store, 'items');
+    this.statesColl = collection(this.store, 'states');
     this.addressColl = collection(this.store, 'addresses');
   }
 
   ngOnInit(): void {
-    this.states$ = collectionData(this.itemColl).pipe(
+    // this.states.forEach(async s => {
+    //   await addDoc(this.statesColl, s);
+    // });
+
+    this.states$ = collectionData(this.statesColl).pipe(
       map(coll => coll
         .map(i => i as IState)
         .sort((a, b) =>
@@ -123,16 +141,14 @@ export class AddressFormComponent implements OnInit {
       )
     );
 
-    this.addresses$ = collectionData(this.addressColl).pipe(map(addresses => addresses.map(a => ({ firstName: a['firstName'], lastName: a['lastName'] }))))
+    this.addresses$ = collectionData(this.addressColl).pipe(map(addresses => addresses.map(a => (a as IAddress))))
 
-    // this.states.forEach(async s => {
-    //   await addDoc(this.coll, s);
-    // });
   }
 
   async onSubmit(): Promise<void> {
     if (this.addressForm.valid) {
-      const address = this.addressForm.value;
+      const address = {} as IAddress;
+      Object.assign(address, this.addressForm.value);
       this.resetAddressForm();
       const key = this.getKey(address);
       await setDoc(doc(this.store, 'addresses', key), address);
@@ -144,7 +160,7 @@ export class AddressFormComponent implements OnInit {
     this.addressForm.get('shipping')?.setValue('free');
   }
 
-  async onAddressClicked(address: { firstName: string; lastName: string; }): Promise<void> {
+  async onAddressClicked(address: IAddress): Promise<void> {
     const key = this.getKey(address);
     const docRef = doc(this.store, 'addresses', key);
     const docSnap = await getDoc(docRef);
@@ -152,5 +168,5 @@ export class AddressFormComponent implements OnInit {
     this.addressForm.setValue(data);
   }
 
-  private getKey = (address: { firstName: string; lastName: string } | any): string => `${address.firstName} ${address.lastName}`.replace(' ', '_').toLowerCase();
+  private getKey = (address: IAddress): string => `${address.firstName} ${address.lastName}`.replace(' ', '_').toLowerCase();
 }
