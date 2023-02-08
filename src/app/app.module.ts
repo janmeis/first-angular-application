@@ -13,6 +13,9 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { PostComponent } from './post/post.component';
 import { NewLinePipe } from './pipes/new-line.pipe';
 import { UsersPostComponent } from './components/users-post/users-post.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { UsersPostComponent } from './components/users-post/users-post.component
     HttpClientModule,
     MaterialModule,
     ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]

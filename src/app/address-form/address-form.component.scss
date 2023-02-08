@@ -25,3 +25,16 @@
 .col:last-child {
   margin-right: 0;
 }
+
+.mat-mdc-card-actions .mat-secondary {
+  margin-left: 0.5rem;
+}
+
+.address-list {
+  display: block;
+  color: blue;
+  cursor: pointer;
+  &:hover {
+      text-decoration: underline;
+  }
+}

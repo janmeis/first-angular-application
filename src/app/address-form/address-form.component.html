@@ -1,4 +1,4 @@
-<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+<form #form="ngForm" [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>Shipping Information</mat-card-title>
@@ -65,7 +65,7 @@
         <div class="col">
           <mat-form-field class="full-width">
             <mat-select placeholder="State" formControlName="state">
-              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+              <mat-option *ngFor="let state of states$ | async" [value]="state.abbreviation">
                 {{ state.name }}
               </mat-option>
             </mat-select>
@@ -94,7 +94,14 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="addressForm.pristine || addressForm.invalid">Submit</button>
+      <button mat-raised-button color="secondary" type="button" [disabled]="addressForm.pristine && !addressForm.controls.firstName.value" (click)="resetAddressForm()">Clear</button>
     </mat-card-actions>
   </mat-card>
 </form>
+
+<ng-container *ngFor="let address of addresses$ | async">
+  <a class="address-list" (click)="onAddressClicked(address)">
+      {{ address.firstName }}&nbsp;{{ address.lastName }}
+  </a>
+</ng-container>
